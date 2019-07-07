@@ -34,12 +34,13 @@ class Network:
 
     # Training calls back propagation for images
     def train(self, images, labels, epochs=1, learning=0.1):
-        for i in choices(range(len(images))):
-            image, label = images[i], labels[i]
-            dw, db = self.backprop(image, label, learning)
-            for j in range(len(self.network)):
-                self.network[j][0][bias_i] = np.add(self.network[j][0][bias_i], db[j])
-                self.network[j][0][weight_i] = np.add(self.network[j][0][weight_i], dw[j])
+        for epoch in range(epochs):
+            for i in choices(range(len(images))):
+                image, label = images[i], labels[i]
+                dw, db = self.backprop(image, label, learning)
+                for j in range(len(self.network)):
+                    self.network[j][0][bias_i] = np.add(self.network[j][0][bias_i], db[j])
+                    self.network[j][0][weight_i] = np.add(self.network[j][0][weight_i], dw[j])
         return network
 
     # Single back propagation
@@ -108,9 +109,9 @@ network = Network()
 
 
 print('-------------')
-for i in range(10000):
-    network.train(images=images, labels=labels, epochs=10, learning=0.1)
-    if i % 100 == 0:
+for i in range(100000):
+    network.train(images=images, labels=labels, epochs=1, learning=0.1)
+    if i % 1000 == 0:
         _, houts = network.forward_propagate(img1, network.network)
         print('Error 1 is {}'.format(sum(abs(lab1 - houts[-1])**2)))
         _, houts = network.forward_propagate(img2, network.network)
