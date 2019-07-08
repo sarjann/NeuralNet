@@ -54,7 +54,6 @@ class Network:
         for i in reversed(range(len(network))):
             if i == len(network) - 1:
                 delta[i] = np.multiply(label - _houts[i], sigmoid(_outs[i], derivative=True))
-                delta[i] = np.multiply(label - _houts[i], sigmoid(_outs[i], derivative=True))
             else:
                 delta[i] = np.multiply(np.dot(np.transpose(network[i + 1][0][weight_i]), delta[i + 1]),
                                        sigmoid(_outs[i], derivative=True))
