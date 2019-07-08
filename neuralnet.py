@@ -28,8 +28,8 @@ class Network:
 
     # Function to create weights and biases for a layer from input and output size (randomly initialised)
     def layer(self, input_size, output_size):
-        w = np.random.rand(output_size, input_size)
-        b = np.random.rand(output_size)
+        w = np.subtract(np.multiply(np.random.rand(output_size, input_size), 2), 1)
+        b = np.subtract(np.multiply(np.random.rand(output_size), 2), 1)
         return [w, b]
 
     # Training calls back propagation for images
