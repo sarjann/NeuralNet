@@ -1,5 +1,5 @@
 import numpy as np
-from random import choices
+from random
 
 
 np.random.seed(7)
@@ -35,7 +35,9 @@ class Network:
     # Training calls back propagation for images
     def train(self, images, labels, epochs=1, learning=0.1):
         for epoch in range(epochs):
-            for i in choices(range(len(images))):
+            shuffled = list(range(len(images)))
+            random.shuffle(shuffled)
+            for i in shuffled:
                 image, label = images[i], labels[i]
                 dw, db = self.backprop(image, label, learning)
                 for j in range(len(self.network)):
